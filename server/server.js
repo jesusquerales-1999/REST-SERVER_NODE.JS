@@ -5,9 +5,6 @@ require('../config/config');
 app.use(require('./user-route/user-route'));
 
 
-
-
-
 mongosse.connect(process.env.URLDB,(err,res) => {
     if(err) throw err;
     console.log('Base de Datos corriendo perfectamente');

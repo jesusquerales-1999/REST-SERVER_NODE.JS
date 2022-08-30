@@ -73,9 +73,6 @@ app.post('/user',(req,res) => {
             })
         }
     });
-    
-
-     
 });
 
 app.put('/user/:id',(req,res) => {
@@ -122,17 +119,8 @@ app.put('/user/:id',(req,res) => {
                         user:usereliminado,
                         message:'El usuario ha sido eliminado correctamente'
                     })
-                }
-            
+                }            
     });
-        
-        
-        
-        
-        
-        
-        
-        
         
         /**
         Este codigo busca un usuario y elimina por id de manera fisica y permanete de la abse de datos.
