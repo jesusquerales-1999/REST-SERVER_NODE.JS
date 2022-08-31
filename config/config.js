@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'dev'){
     urlDB ='mongodb://localhost:27017/expres'
 }
 
- else{  urlDB ='mongodb+srv://jesusQuerales-000:Wfnes6tVV48VUpr0@clusterq.thlpdjo.mongodb.net/?retryWrites=true&w=majority';
+ else{  urlDB = process.env.MONGO_URI;
 };
 
 process.env.URLDB = urlDB; 
