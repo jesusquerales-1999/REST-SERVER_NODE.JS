@@ -24,7 +24,7 @@ app.post('/login',(req,res)=>{
             return res.status(400).json({
                 ok:false,
                 err:{
-                    message:'El (usuario) o la contarseña son incorrectos'
+                    message:'El usuario o la contarseña son incorrectos'
                 }
             })
         }
@@ -33,7 +33,7 @@ app.post('/login',(req,res)=>{
             return res.status(400).json({
                 ok:false,
                 err:{
-                    message:'El usuario o la (contarseña) son incorrectos'
+                    message:'El usuario o la contarseña son incorrectos'
                 }
             });
         }
