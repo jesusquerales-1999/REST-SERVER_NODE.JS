@@ -1,17 +1,22 @@
 const express = require('express');
-const app = express();
+let {verificaToken,verificaAdmin_ROLE} = require('../middlewars/autenticacion');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
-const bodyParser = require('body-parser');
 const userModel = require('../user-model/user-model');
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
 
-// parse application/json
-app.use(bodyParser.json())
+const app = express();
 
-app.get('/user',(req,res) => {
+app.get('/user',verificaToken,(req,res) => {
 
+    /**
+     * Esto es para obtener informacio del paylod
+     * return res.json({
+        usuario : req.data,
+        nombre : req.data.nombre,
+        email: req.data.email
+    })
+     */
+ 
 let desde = req.query.desde || 0;
 desde = Number(desde);
 
@@ -43,7 +48,7 @@ limite = Number(limite);
 
 });
 
-app.post('/user',(req,res) => {
+app.post('/user',[verificaToken,verificaAdmin_ROLE],(req,res) => {
     
     let body = req.body
     let usuario = new userModel({
@@ -75,7 +80,7 @@ app.post('/user',(req,res) => {
     });
 });
 
-app.put('/user/:id',(req,res) => {
+app.put('/user/:id',[verificaToken,verificaAdmin_ROLE],(req,res) => {
     let id = req.params.id
     let body = _.pick(req.body,['nombre','apellido','role','password','img','email']);
 
@@ -88,14 +93,14 @@ app.put('/user/:id',(req,res) => {
         }else{
             res.status(200).json({
                 ok:true,
-                userdb
+                usuario:userdb
             })
         }
     });
 
 });
 
-    app.delete('/user/:id',(req,res) => {
+    app.delete('/user/:id',[verificaToken,verificaAdmin_ROLE],(req,res) => {
 
         //Eliminacion logica de un usuario de la base de datos.
         let id = req.params.id;
